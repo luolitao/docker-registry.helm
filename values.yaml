@@ -18,7 +18,7 @@ serviceAccount:
   annotations: {}
 
 image:
-  repository: registry
+  repository: swr.cn-north-4.myhuaweicloud.com/ddn-k8s/docker.io/registry
   tag: 3.0.0
   pullPolicy: IfNotPresent
 # imagePullSecrets:
@@ -40,21 +40,21 @@ service:
   labels: {}
   # foo.io/baz: "false"
 ingress:
-  enabled: false
+  enabled: enable
   className: nginx
   path: /
   # Used to create an Ingress record.
   hosts:
-    - chart-example.local
+    - 100.64.0.13
   annotations: {}
-    # kubernetes.io/ingress.class: nginx
-    # kubernetes.io/tls-acme: "true"
+    kubernetes.io/ingress.class: nginx
+    kubernetes.io/tls-acme: "true"
   labels: {}
   tls:
     # Secrets must be manually created in the namespace.
-    # - secretName: chart-example-tls
-    #   hosts:
-    #     - chart-example.local
+    - secretName: chart-example-tls
+       hosts:
+         - 100.64.0.12
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious
   # choice for the user. This also increases chances charts run on environments with little
@@ -68,7 +68,7 @@ resources: {}
   #   memory: 128Mi
 persistence:
   accessMode: 'ReadWriteOnce'
-  enabled: false
+  enabled: true
   size: 10Gi
   # storageClass: '-'
 
